@@ -1,10 +1,17 @@
 __author__ = 'jxzheng'
 
-import pandas as pd
+#import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import random
 
+
+'''
+The format of the causal cond distribution was assigned as dictionary with key in the forms of tuples:
+P(X_t | X_{1:t-1}, M_{1:t-1}) = px[(X_t,'X_{1:t-1}','M_{1:t-1}')]
+
+Z and py will parallel this
+'''
 def maxEntropySolve(N, G, H, eqCons, neqCons, px, truePy, A, B, stepSize, delta):
     #N: length of sequence
     #G, H: dicts indicating features
@@ -17,11 +24,11 @@ def maxEntropySolve(N, G, H, eqCons, neqCons, px, truePy, A, B, stepSize, delta)
 
     #Initialize dual vars
 
-    lamb = np.random.rand(1,N)
-    gamma = np.random.rand(1,N)
+    lamb = np.random.rand(1,eqCons)
+    gamma = np.random.rand(1,neqCons)
 
-    Z = np.ones(shape = [B*N, A**N, B**(N-1)])
-    py = np.zeros(shape = [B*N, A**N, B**(N-1)])
+    Z = {}
+    py = {}
 
     cnt = 0
     nextlamb = -1
@@ -29,7 +36,14 @@ def maxEntropySolve(N, G, H, eqCons, neqCons, px, truePy, A, B, stepSize, delta)
 
     #compute the expectation of G
     trueEG = 0
-    for
+    for xSeqNum in range(0,A**N):
+        for ySeqNum in range(0,B**N):
+            xSeq = str(xSeqNum)
+            ySeq = str(ySeqNum)
+
+            currentJoint = 1
+            for i in range(0,N):
+                currentJoint = currentJoint * px[()]
 
     return {'dual':None, 'py':None}
 
